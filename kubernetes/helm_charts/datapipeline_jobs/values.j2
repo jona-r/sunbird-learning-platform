@@ -188,6 +188,7 @@ post-publish-processor:
       lms.basePath = "{{ lms_service_base_url }}"
       learning_service.basePath = "{{ kp_learning_service_base_url }}"
       dial.basePath = "https://{{domain_name}}/dial/"
+      content.basePath = "{{ kp_content_service_base_url }}"
     }
 
     cloudstorage {
@@ -888,7 +889,7 @@ dialcode-context-updater:
     dialcode_context_updater {
       actions="dialcode-context-update"
       search_mode="Collection"
-      context_map_path = "https://raw.githubusercontent.com/project-sunbird/knowledge-platform-jobs/release-5.0.0/dialcode-context-updater/src/main/resources/contextMapping.json"
+      context_map_path = "https://raw.githubusercontent.com/project-sunbird/knowledge-platform-jobs/master/dialcode-context-updater/src/main/resources/contextMapping.json"
       identifier_search_fields = ["identifier", "primaryCategory", "channel"]
       dial_code_context_read_api_path = "/dialcode/v4/read/"
       dial_code_context_update_api_path = "/dialcode/v4/update/"
