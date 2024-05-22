@@ -381,6 +381,7 @@ cloud_storage_secret: ""
 cloud_storage_container: ""
 cloud_storage_endpoint: ""
 cloudstorage_sdk_endpoint: ""
+cloud_storage_proxy_host: ""
 
 
 ### csp-migrator related vars
