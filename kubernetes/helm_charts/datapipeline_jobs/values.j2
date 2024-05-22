@@ -1321,3 +1321,50 @@ cassandra-data-migration:
     parallelism.default: 1
     jobmanager.execution.failover-strategy: region
     taskmanager.memory.network.fraction: 0.1
+
+transaction-event-processor:
+  transaction-event-processor: |+
+    include file("/data/flink/conf/base-config.conf")
+    job {
+      env = "{{ env_name }}"
+    }
+
+    kafka {
+      input.topic = "{{ env_name }}.learning.graph.events"
+      output.audit.topic = "{{ env_name }}.telemetry.raw"
+      output.obsrv.topic = "{{ env_name }}.transaction.meta"
+      groupId = "{{ env_name }}-transaction-event-processor-group"
+    }
+
+    task {
+      consumer.parallelism = {{ audit_event_generator_consumer_parallelism }}
+      parallelism = {{ audit_event_generator_parallelism }}
+      producer.parallelism = {{ audit_event_generator_producer_parallelism }}
+      window.time = 60
+    }
+
+    schema {
+      basePath = "{{ kp_schema_base_path }}"
+    }
+
+    schema {
+      basePath = ${schema_base_path}
+    }
+
+    channel.default = "{{ audit_event_generator_default_channel }}"
+
+    job {
+        audit-event-generator = true
+        audit-history-indexer = true
+        obsrv-metadata-generator = true
+    }
+
+  flink-conf: |+
+    jobmanager.memory.flink.size: {{ flink_job_names['audit-history-indexer'].jobmanager_memory }}
+    taskmanager.memory.flink.size: {{ flink_job_names['audit-history-indexer'].taskmanager_memory }}
+    taskmanager.numberOfTaskSlots: {{ flink_job_names['audit-history-indexer'].taskslots }}
+    parallelism.default: 1
+    jobmanager.execution.failover-strategy: region
+    taskmanager.memory.network.fraction: 0.1
+
+  job_classname: org.sunbird.job.transaction.task.TransactionEventProcessorStreamTask
