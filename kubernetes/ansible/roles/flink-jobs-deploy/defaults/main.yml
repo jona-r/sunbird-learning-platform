@@ -126,6 +126,14 @@ collection_certificate_generator_rc_badcharlist: "{{ rc_bad_char_list | default(
 registry_sunbird_keyspace: "sunbird"
 cert_registry_table: "cert_registry"
 
+### transaction event processor related vars
+transaction_event_processor_consumer_parallelism: 1
+transaction_event_processor_parallelism: 1
+transaction_event_processor_producer_parallelism: 1
+transaction_event_processor_default_channel: "{{ default_channel | default('org.sunbird') }}"
+enable_audit_event_generator: true
+enable_audit_history_indexer: true
+enable_obsrv_metadata_generator: false
 
 ### to be removed
 job_classname: ""
@@ -288,6 +296,13 @@ flink_job_names:
     cpu_requests: 0.3
   cassandra-data-migration:
     job_class_name: 'org.sunbird.job.task.CassandraDataMigrationStreamTask'
+    replica: 1
+    jobmanager_memory: 1024m
+    taskmanager_memory: 1024m
+    taskslots: 1
+    cpu_requests: 0.3
+  transaction-event-processor:
+    job_class_name: 'org.sunbird.job.transaction.task.TransactionEventProcessorStreamTask'
     replica: 1
     jobmanager_memory: 1024m
     taskmanager_memory: 1024m

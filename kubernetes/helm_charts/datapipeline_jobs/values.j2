@@ -1337,34 +1337,28 @@ transaction-event-processor:
     }
 
     task {
-      consumer.parallelism = {{ audit_event_generator_consumer_parallelism }}
-      parallelism = {{ audit_event_generator_parallelism }}
-      producer.parallelism = {{ audit_event_generator_producer_parallelism }}
+      consumer.parallelism = {{ transaction_event_processor_consumer_parallelism }}
+      parallelism = {{ transaction_event_processor_parallelism }}
+      producer.parallelism = {{ transaction_event_processor_producer_parallelism }}
       window.time = 60
     }
 
     schema {
-      basePath = "{{ kp_schema_base_path }}"
+      basePath = "{kp_schema_base_path}"
     }
 
-    schema {
-      basePath = ${schema_base_path}
-    }
-
-    channel.default = "{{ audit_event_generator_default_channel }}"
+    channel.default = "{{ transaction_event_processor_default_channel }}"
 
     job {
-        audit-event-generator = true
-        audit-history-indexer = true
-        obsrv-metadata-generator = true
+        audit-event-generator =  {{ enable_audit_event_generator }}
+        audit-history-indexer = {{ enable_audit_history_indexer }}
+        obsrv-metadata-generator = {{ enable_obsrv_metadata_generator }}
     }
 
   flink-conf: |+
-    jobmanager.memory.flink.size: {{ flink_job_names['audit-history-indexer'].jobmanager_memory }}
-    taskmanager.memory.flink.size: {{ flink_job_names['audit-history-indexer'].taskmanager_memory }}
-    taskmanager.numberOfTaskSlots: {{ flink_job_names['audit-history-indexer'].taskslots }}
+    jobmanager.memory.flink.size: {{ flink_job_names['transaction-event-processor'].jobmanager_memory }}
+    taskmanager.memory.flink.size: {{ flink_job_names['transaction-event-processor'].taskmanager_memory }}
+    taskmanager.numberOfTaskSlots: {{ flink_job_names['transaction-event-processor'].taskslots }}
     parallelism.default: 1
     jobmanager.execution.failover-strategy: region
     taskmanager.memory.network.fraction: 0.1
-
-  job_classname: org.sunbird.job.transaction.task.TransactionEventProcessorStreamTask
