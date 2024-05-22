@@ -1350,9 +1350,9 @@ transaction-event-processor:
     channel.default = "{{ transaction_event_processor_default_channel }}"
 
     job {
-        audit-event-generator =  {{ enable_audit_event_generator }}
-        audit-history-indexer = {{ enable_audit_history_indexer }}
-        obsrv-metadata-generator = {{ enable_obsrv_metadata_generator }}
+        audit-event-generator =  "{{ enable_audit_event_generator }}"
+        audit-history-indexer = "{{ enable_audit_history_indexer }}"
+        obsrv-metadata-generator = "{{ enable_obsrv_metadata_generator }}"
     }
 
   flink-conf: |+
