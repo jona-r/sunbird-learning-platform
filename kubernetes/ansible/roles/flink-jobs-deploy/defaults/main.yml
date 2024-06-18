@@ -398,3 +398,13 @@ video_stream_topic_name: "{{ env_name }}.live.video.stream.request"
 content_hierarchy_keyspace_name: "{{ hierarchy_keyspace_name }}"
 questionset_hierarchy_keyspace_name: "{{ hierarchy_keyspace_name }}"
 gdrive_application_name: "drive-download"
+
+### video-stream-generator azure_mediakind related vars
+azure_mediakind_project_name: "{{ azure_mediakind_project_name | default('') }}"
+azure_mediakind_auth_token: "{{ azure_mediakind_auth_token | default('') }}"
+azure_mediakind_account_name: "{{ azure_mediakind_account_name | default('') }}"
+azure_mediakind_transform_default: "media_transform_default"
+azure_mediakind_stream_base_url: "{{ azure_mediakind_stream_base_url | default('') }}"
+azure_mediakind_stream_endpoint_name: "default"
+azure_mediakind_stream_protocol : "Hls"
+azure_mediakind_stream_policy_name : "Predefined_ClearStreamingOnly"
