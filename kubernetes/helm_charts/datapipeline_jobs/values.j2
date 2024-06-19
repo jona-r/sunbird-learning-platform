@@ -225,27 +225,7 @@ video-stream-generator:
       table = "job_request"
     }
     service.content.basePath="{{ kp_content_service_base_url }}"
-    azure {
-      location = "centralindia"
-      login {
-        endpoint="https://login.microsoftonline.com"
-      }
-      api {
-        endpoint="https://management.azure.com"
-        version = "2018-07-01"
-      }
-      transform {
-        default = "media_transform_default"
-        hls = "media_transform_hls"
-      }
-      stream {
-        base_url="{{ video_stream_generator_azure_stream_base_url }}"
-        endpoint_name = "default"
-        protocol = "Hls"
-        policy_name = "Predefined_ClearStreamingOnly"
-      }
-    }
-
+    
     azure_mediakind{
       project_name="{{ azure_mediakind_project_name }}"
       auth_token="{{ azure_mediakind_auth_token }}"
@@ -263,13 +243,6 @@ video-stream-generator:
         policy_name = "{{azure_mediakind_stream_policy_name}}"
       }
     }
-
-    azure_tenant="{{ video_stream_generator_azure_tenant }}"
-    azure_subscription_id="{{ video_stream_generator_azure_subscription_id }}"
-    azure_account_name="{{ video_stream_generator_azure_account_name }}"
-    azure_resource_group_name="{{ video_stream_generator_azure_resource_group_name }}"
-    azure_token_client_key="{{ video_stream_generator_azure_token_client_key }}"
-    azure_token_client_secret="{{ video_stream_generator_azure_token_client_secret }}"
     ## CSP Name. e.g: aws or azure
     media_service_type="{{ media_service_provider_name }}"
     ## AWS Elemental Media Convert Config
@@ -1129,32 +1102,6 @@ live-video-stream-generator:
       table = "job_request"
     }
     service.content.basePath="{{ kp_content_service_base_url }}"
-    azure {
-      location = "centralindia"
-      login {
-        endpoint="https://login.microsoftonline.com"
-      }
-      api {
-        endpoint="https://management.azure.com"
-        version = "2018-07-01"
-      }
-      transform {
-        default = "media_transform_default"
-        hls = "media_transform_hls"
-      }
-      stream {
-        base_url="{{ video_stream_generator_azure_stream_base_url }}"
-        endpoint_name = "default"
-        protocol = "Hls"
-        policy_name = "Predefined_ClearStreamingOnly"
-      }
-    }
-    azure_tenant="{{ video_stream_generator_azure_tenant }}"
-    azure_subscription_id="{{ video_stream_generator_azure_subscription_id }}"
-    azure_account_name="{{ video_stream_generator_azure_account_name }}"
-    azure_resource_group_name="{{ video_stream_generator_azure_resource_group_name }}"
-    azure_token_client_key="{{ video_stream_generator_azure_token_client_key }}"
-    azure_token_client_secret="{{ video_stream_generator_azure_token_client_secret }}"
     ## CSP Name. e.g: aws or azure
     media_service_type="{{ media_service_provider_name }}"
     ## AWS Elemental Media Convert Config
