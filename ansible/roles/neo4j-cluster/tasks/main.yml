@@ -18,15 +18,15 @@
 - debug:
     msg: "System {{ neo4j_dir }}"
 
-- name: Copy the neo4j cluster zip file
+- name: Copy the neo4j cluster zip file changed
   become: yes
-  become_user: "{{ learner_user }}"
+  become_user: learning
   copy:
     src: "artifacts/{{ neo4j_zip }}"
-    dest: "{{ learner_user_home }}"
+    dest: /home/learning
     mode: '0755'
-    owner: "{{ learner_user }}"
-    group: "{{ learner_user }}"
+    owner: learning
+    group: learning
 
 
 - name: Extract archive {{neo4j_zip}}
