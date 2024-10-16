@@ -14,8 +14,8 @@
 - name: Copy logstash configuration files for platform
   become: yes
   become_user: "{{ learner_user }}"
-  template:
-    src: logstash-lp.j2
+  copy:
+    src: logstash-lp.conf
     dest: "{{ learner_user_home }}/logstash-{{ logstash_version }}/logstash-lp.conf"
     mode: '0644'
 #- name: Copy logstash configuration files for platform
