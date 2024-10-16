@@ -13,8 +13,15 @@
 
 - name: Copy logstash configuration files for platform
   become: yes
-  become_user: "{{learner_user}}"
-  template: src=logstash-lp.j2  dest={{learner_user_home}}/logstash-{{logstash_version}}/logstash-lp.conf
+  become_user: "{{ learner_user }}"
+  template:
+    src: logstash-lp.j2
+    dest: "{{ learner_user_home }}/logstash-{{ logstash_version }}/logstash-lp.conf"
+    mode: '0644'
+#- name: Copy logstash configuration files for platform
+#  become: yes
+#  become_user: "{{learner_user}}"
+#  template: src=logstash-lp.j2  dest={{learner_user_home}}/logstash-{{logstash_version}}/logstash-lp.conf
 
 - name: remove existing kernel extension jar file
   become: yes
