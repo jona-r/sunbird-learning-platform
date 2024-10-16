@@ -11,7 +11,7 @@
   systemd: name=logstash state=stopped
   ignore_errors: yes
 
-- name: Copy logstash configuration files for platform
+- name: Copy logstash configuration files for platform new
   become: yes
   become_user: "{{ learner_user }}"
   copy:
