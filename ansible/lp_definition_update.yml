@@ -4,7 +4,7 @@
        - ['{{inventory_dir}}/secrets.yml']
   become: yes
   tasks:
-    - name: Update definitions
+  - name: Update definitions
     become: yes
     become_user: "{{ learner_user }}"
     uri:
